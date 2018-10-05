@@ -40,12 +40,14 @@ def formatted_string(string, pattern=None, filename=None):
             if "%t" in string:
                 count = pattern.count_stitch_commands(pyembroidery.TRIM)
                 string = string.replace("%t", str(count))
-            if "%x" in string or "%X" in string or "%y" in string or "%Y" in string:
+            if "%x" in string or "%X" in string or "%y" in string or "%Y" in string or "%w" in string or "%h" in string:
                 bounds = pattern.bounds()
                 string = string.replace("%x", str(bounds[0]))
                 string = string.replace("%y", str(bounds[1]))
                 string = string.replace("%X", str(bounds[2]))
                 string = string.replace("%Y", str(bounds[3]))
+                string = string.replace("%w", str(bounds[2] - bounds[0]))
+                string = string.replace("%h", str(bounds[3] - bounds[1]))
             if "%l" in string:
                 try:
                     label = pattern.extras["name"]

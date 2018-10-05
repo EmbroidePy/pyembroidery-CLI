@@ -7,8 +7,8 @@ Requires pyembroidery
 
 ---
 * pyemb.py CLI - Fully fleshed out CLI for pyembroidery.
-   * -i <input> [<input>]*, matches wildcards.
-   * -o <output> [<output>]*, extension matches wildcard.
+   * -i <input> [\<input\>]*, matches wildcards.
+   * -o <output> [\<output\>]*, extension matches wildcard.
    * -c <conditional>, checks patterns against a conditional and excludes from future operations if failed.
    * -f <print>, print formated data about patterns.
       * %f, filename
@@ -22,29 +22,29 @@ Requires pyembroidery
       * %c, COLOR_CHANGE & NEEDLE_SET
       * %t, TRIM command count
       * %l, internal label if it exists.
-   * -s <scale> [<scale_y> [<x> <y>]], scale pattern
-   * -r <theta> [<x> <y>], rotate pattern
-   * -t <x> <y>, translate
-   * -e <setting> <value> [<setting> <value>]*, set encoder settings.
+   * -s \<scale\> [\<scale_y\> [\<x\> \<y\>]], scale pattern
+   * -r \<theta\> [\<x\> \<y\>], rotate pattern
+   * -t \<x\> \<y\>, translate
+   * -e \<setting\> \<value\> [\<setting\> \<value\>]*, set encoder settings.
    * -q, quiet mode.
    * -v, verbose mode (default)
 
-So for example to do the same thing as mass_convert we execute:
+* So for example to do the same thing as mass_convert we execute:
 `pyemb.py -i convert\* -o results\%F.*`
 
-To do the same as pyembroidery-convert
+* To do the same as pyembroidery-convert
 `pyemb.py -i <source-file> -o <destination-file>`
 
-To do the same as pyembroidery-exporter
+* To do the same as pyembroidery-exporter
 `pyemb.py -i <source-file> -o %f.u01 %f.exp %f.dst %f.jef %f.pes %f.vp3`
 
-To create an image for every readable embroidery in a directory:
+* To create an image for every readable embroidery in a directory:
 `pyemb.py -i * -o %f.png`
 
-To create an image for only the ones with fewer than 15000 stitches.
+* To create an image for only the ones with fewer than 15000 stitches.
 `pyemb.py -i * -c "%S < 15000" -o %f.png`
 
-To flip `my_embroidery.exp` horizontally
+* To flip `my_embroidery.exp` horizontally
 `pyemb.py -i my_embroidery.exp -s -1 1 -o flipped.exp`
 
 ---

@@ -5,8 +5,10 @@ Requires pyembroidery
 
 `pip install pyembroidery`
 
+pyemb.py - Full pyembroidery CLI
+
+Command Flags
 ---
-* pyemb.py CLI - Full pyembroidery CLI.
     * -i [\<input\>]*, matches wildcards
     * -o [\<output\>]*, matches wildcard, formatted.
     * -f [\<string\>], print string, formatted

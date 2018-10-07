@@ -6,6 +6,8 @@ import sys
 
 import pyembroidery
 
+PYEMB_VERSION = "0.0.1"
+
 
 def formatted_string(string, pattern=None, filename=None):
     if "%" not in string:
@@ -59,8 +61,10 @@ def formatted_string(string, pattern=None, filename=None):
 
 class PyEmb:
     def __init__(self, arguments):
-        self.log = print
+        self.log = self.no_operation
         self.elements = list(reversed(arguments))
+        if len(arguments) == 1:
+            self.elements = ["-h"]
         self.command_lookup = {
             "-i": self.command_input,
             "-o": self.command_output,
@@ -72,6 +76,7 @@ class PyEmb:
             "-e": self.command_encode_setting,
             "-q": self.command_quiet,
             "-v": self.command_verbose,
+            "-h": self.command_help
         }
 
     def get(self):
@@ -84,6 +89,40 @@ class PyEmb:
             return self.get()
         else:
             return None
+
+    def command_help(self, values):
+        print("PyEmb v.", PYEMB_VERSION)
+        print("-i [<input>]*, matches wildcards]*")
+        print("-o [<output>]*, matches wildcard, formatted.")
+        print("-f [<string>], print string, formatted")
+        print("-c conditional, filters embroidery patterns, formatted")
+        print("-s <scale> [<scale_y> [<x> <y>]], scale pattern")
+        print("-r <theta> [<x> <y>], rotate pattern")
+        print("-t <x> <y>, translate")
+        print("-e [<setting> <value>]*, set encoder settings.")
+        print("-q, quiet mode.")
+        print("-v, verbose mode")
+        print("-h,Display this message.")
+        print("")
+        print("String Formatting:")
+        print("%f, filename")
+        print("%F, filename without directory")
+        print("%e, extension")
+        print("%d, directory")
+        print("%n, name of file, without extension")
+        print("%S, total commands in stitches")
+        print("%s, STITCH command count")
+        print("%j, JUMP command count")
+        print("%c, COLOR_CHANGE & NEEDLE_SET count")
+        print("%t, TRIM command count")
+        print("%l, internal label, if it exists")
+        print("%w, width")
+        print("%h, height")
+        print("%x, min x")
+        print("%y, min y")
+        print("%X, max x")
+        print("%Y, max y")
+        return values
 
     def execute(self):
         values = []
@@ -122,19 +161,27 @@ class PyEmb:
                 ext_split = os.path.splitext(path)
                 name = ext_split[0]
                 ext = ext_split[1]
-                if ext == ".*":
+                if '*' in name:
+                    filename_suffix = os.path.split(filename)[1]
+                    name = name.replace('*', filename_suffix)
+                if ext == "" or ext == ".*":
                     for file_type in pyembroidery.supported_formats():
                         if 'writer' in file_type:
                             out_file = name + '.' + file_type['extension']
                             self.log("Saving:", out_file)
                             pyembroidery.write_embroidery(file_type['writer'], pattern, out_file, settings)
                 else:
-                    self.log("Saving:", path)
-                    pyembroidery.write(pattern, path, settings)
+                    self.log("Saving:", name + ext)
+                    pyembroidery.write(pattern, name + ext, settings)
         return []
 
     def command_format(self, values):
-        string_format = self.v()
+        strings_format = []
+        v = self.v()
+        while v is not None:
+            strings_format.append(v)
+            v = self.v()
+        string_format = " ".join(strings_format)
         for value in values:
             string = string_format
             if not isinstance(value, tuple):

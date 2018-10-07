@@ -42,13 +42,15 @@ String Formatting:
     * %Y, max y
 
 * So for example to do the same thing as mass_convert we execute:
-`pyemb.py -i convert\* -o results\%F.*`
+`pyemb.py -i convert\* -o results\*`
 
 * To do the same as pyembroidery-convert
 `pyemb.py -i <source-file> -o <destination-file>`
 
 * To do the same as pyembroidery-exporter
 `pyemb.py -i <source-file> -o %f.u01 %f.exp %f.dst %f.jef %f.pes %f.vp3`
+or
+`pyemb.py -i <source-file> -o %f.*`
 
 * To create an image for every readable embroidery in a directory:
 `pyemb.py -i * -o %f.png`

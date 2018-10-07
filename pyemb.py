@@ -102,7 +102,7 @@ class PyEmb:
         print("-e [<setting> <value>]*, set encoder settings.")
         print("-q, quiet mode.")
         print("-v, verbose mode")
-        print("-h,Display this message.")
+        print("-h, display this message.")
         print("")
         print("String Formatting:")
         print("%f, filename")

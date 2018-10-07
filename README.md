@@ -9,17 +9,17 @@ pyemb.py - Full pyembroidery CLI
 
 Command Flags
 ---
-    * -i [\<input\>]*, matches wildcards
-    * -o [\<output\>]*, matches wildcard, formatted.
-    * -f [\<string\>], print string, formatted
+    * -i [<input>]*, matches wildcards
+    * -o [<output>]*, matches wildcard, formatted
+    * -f [<string>], print string, formatted
     * -c conditional, filters embroidery patterns, formatted
-    * -s \<scale\> [\<scale_y\> [\<x\> \<y\>]], scale pattern
-    * -r <theta> [\<x\> \<y\>], rotate pattern
-    * -t \<x\> \<y\>, translate
-    * -e [\<setting\> \<value\>]*, set encoder settings.
-    * -q, quiet mode.
+    * -s <scale> [<scale_y> [<x> <y>]], scale pattern
+    * -r <theta> [<x> <y>], rotate pattern
+    * -t <x> <y>, translate
+    * -e [<setting> <value>]*, set encoder settings
+    * -q, quiet mode
     * -v, verbose mode
-    * -h, display this message.
+    * -h, display this message
 
 String Formatting:
 ---

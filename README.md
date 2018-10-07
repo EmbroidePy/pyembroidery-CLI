@@ -6,7 +6,7 @@ Requires pyembroidery
 `pip install pyembroidery`
 
 ---
-* pyemb.py CLI - Fully fleshed out CLI for pyembroidery.
+* pyemb.py CLI - Full pyembroidery CLI.
     * -i [\<input\>]*, matches wildcards
     * -o [\<output\>]*, matches wildcard, formatted.
     * -f [\<string\>], print string, formatted
@@ -20,6 +20,7 @@ Requires pyembroidery
     * -h, display this message.
 
 String Formatting:
+---
     * %f, filename
     * %F, filename without directory
     * %e, extension

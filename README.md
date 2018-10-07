@@ -7,27 +7,36 @@ Requires pyembroidery
 
 ---
 * pyemb.py CLI - Fully fleshed out CLI for pyembroidery.
-   * -i <input> [\<input\>]*, matches wildcards.
-   * -o <output> [\<output\>]*, extension matches wildcard.
-   * -c <conditional>, checks patterns against a conditional and excludes from future operations if failed.
-   * -f <print>, print formated data about patterns.
-      * %f, filename
-      * %F, filename without directory
-      * %e, extension
-      * %d, directory
-      * %n, name of file, without extension
-      * %S, total commands in stitches.
-      * %s, STITCH command count
-      * %j, JUMP command count
-      * %c, COLOR_CHANGE & NEEDLE_SET
-      * %t, TRIM command count
-      * %l, internal label if it exists.
-   * -s \<scale\> [\<scale_y\> [\<x\> \<y\>]], scale pattern
-   * -r \<theta\> [\<x\> \<y\>], rotate pattern
-   * -t \<x\> \<y\>, translate
-   * -e \<setting\> \<value\> [\<setting\> \<value\>]*, set encoder settings.
-   * -q, quiet mode.
-   * -v, verbose mode (default)
+    * -i [<input>]*, matches wildcards]*
+    * -o [<output>]*, matches wildcard, formatted.
+    * -f [<string>], print string, formatted
+    * -c conditional, filters embroidery patterns, formatted
+    * -s <scale> [<scale_y> [<x> <y>]], scale pattern
+    * -r <theta> [<x> <y>], rotate pattern
+    * -t <x> <y>, translate
+    * -e [<setting> <value>]*, set encoder settings.
+    * -q, quiet mode.
+    * -v, verbose mode
+    * -h, display this message.
+
+String Formatting:
+    * %f, filename
+    * %F, filename without directory
+    * %e, extension
+    * %d, directory
+    * %n, name of file, without extension
+    * %S, total commands in stitches
+    * %s, STITCH command count
+    * %j, JUMP command count
+    * %c, COLOR_CHANGE & NEEDLE_SET count
+    * %t, TRIM command count
+    * %l, internal label, if it exists
+    * %w, width
+    * %h, height
+    * %x, min x
+    * %y, min y
+    * %X, max x
+    * %Y, max y
 
 * So for example to do the same thing as mass_convert we execute:
 `pyemb.py -i convert\* -o results\%F.*`

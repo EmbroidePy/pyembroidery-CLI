@@ -6,7 +6,7 @@ import sys
 
 import pyembroidery
 
-PYEMB_VERSION = "0.0.1"
+PYEMB_VERSION = "0.0.2"
 
 
 def formatted_string(string, pattern=None, filename=None):
@@ -68,6 +68,7 @@ class PyEmb:
         self.command_lookup = {
             "-i": self.command_input,
             "-o": self.command_output,
+            "-m": self.command_merge,
             "-c": self.command_conditional,
             "-f": self.command_format,
             "-s": self.command_scale,
@@ -94,6 +95,7 @@ class PyEmb:
         print("PyEmb v.", PYEMB_VERSION)
         print("-i [<input>]*, matches wildcards")
         print("-o [<output>]*, matches wildcard, formatted")
+        print("-m [<input>]*, matches wildcards")
         print("-f [<string>], print string, formatted")
         print("-c conditional, filters embroidery patterns, formatted")
         print("-s <scale> [<scale_y> [<x> <y>]], scale pattern")
@@ -174,6 +176,19 @@ class PyEmb:
                     self.log("Saving:", name + ext)
                     pyembroidery.write(pattern, name + ext, settings)
         return []
+
+    def command_merge(self, values):
+        for value in values:
+            if not isinstance(value, tuple):
+                continue
+            pattern = value[0]
+            v = self.v()
+            input_files = glob.glob(v)
+            for input_file in input_files:
+                self.log("Merging:", input_file)
+                pattern.stitches = pattern.stitches[0:-1]  # remove flagged end.
+                pyembroidery.read(input_file, pattern=pattern)
+            return values
 
     def command_format(self, values):
         strings_format = []
